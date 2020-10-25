@@ -3,10 +3,7 @@ let imagesArr = [];
 
 form.addEventListener("submit", async function(e){
     e.preventDefault();
-    for(let i=imagesArr.length-1; i >= 0 ; i--){
-        imagesArr[i].src= "";
-        imagesArr.pop()
-    }
+    clearImages(imagesArr);
     const searchItem = form.elements.query.value;
     const response = await axios.get(`http://api.tvmaze.com/search/shows?q=${searchItem}`);
     const data = response.data;
@@ -23,5 +20,12 @@ function makeImages(shows){
             document.body.append(newImage);
             imagesArr.push(newImage);
         }  
+    }
+}
+
+function clearImages(searches){
+    for(let i=searches.length-1; i >= 0 ; i--){
+        searches[i].src= "";
+        searches.pop()
     }
 }
